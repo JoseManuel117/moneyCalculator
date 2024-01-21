@@ -13,14 +13,18 @@ public class ExchangeMoneyCommand implements Command{
         this.moneyDisplay = moneyDisplay;
     }
 
+
+
     @Override
     public void execute() {
         Money money = moneyDialog.get();
         Currency currency = currencyDialog.get();
+        System.out.println(money.currency());
+        System.out.println(currency);
 
         ExchangeRate exchangeRate = exchangeRateLoader.load(money.currency(), currency);
-        Money result = new Money((long) (money.amount()*exchangeRate.rate()), currency);
-
+        Money result = new Money((double) (money.amount()*exchangeRate.rate()), currency);
+        System.out.println("result = " + result);
         moneyDisplay.show(result);
     }
 }
